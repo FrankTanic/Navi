@@ -8,5 +8,7 @@ namespace Navi.WebApi.Models
         public NaviDbContext(DbContextOptions options)
             : base(options)
         { }
+
+        public DbSet<Location> Locations { get; set; } 
     }
 }
