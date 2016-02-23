@@ -1,21 +1,19 @@
 ﻿var navigatorApp = angular.module('navigatorApp', []);
 
-navigatorApp.controller('LocationListCtrl', function ($scope) {
-    $scope.locations = [
-      {
-          'name': 'BLiS',
-          'description': 'Where the cool kids roam.',
-          'coords': 'None jet.'
-      },
-      {
-          'name': 'Microsoft',
-          'description': 'You love them or you hate them.',
-          'coords': 'None jet.'
-      },
-      {
-          'name': 'Those people from Iphone and stuff',
-          'description': 'Heard the cult leader passed away recently.',
-          'coords': 'None jet.'
-      }
-    ];
+navigatorApp.service('dataService', function ($http) {
+delete $http.defaults.headers.common['X-Requested-With'];
+this.getData = function() {
+    // $http() returns a $promise that we can add handlers with .then()
+    return $http({
+        method: 'GET',
+        url: 'http://localhost:59184/api/location',
+     });
+ }
+});
+
+navigatorApp.controller('LocationListCtrl', function ($scope, dataService) {
+    $scope.data = null;
+    dataService.getData().then(function(dataResponse) {
+        $scope.data = dataResponse;
+    });
 });
