@@ -3,9 +3,15 @@
 <head>
     <script src="node_modules/angular/angular.js"></script>
     <script src="Scripts-ng/controllers.js"></script>
-    <link rel="stylesheet" href="css/Style.css" />
+    <link rel="stylesheet" href="Styles/Style.css" />
 </head>
 <body ng-controller="LocationListCtrl">
+    <section class="navbar">
+        <ul>
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="CreateLocation/Create.html">CreateLocation</a></li>
+        </ul>
+    </section>
     <h1>Locations</h1>
     <ul>
         <li ng-repeat="location in locations">
