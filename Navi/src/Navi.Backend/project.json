@@ -5,6 +5,8 @@
   },
 
   "dependencies": {
+    "angularjs": "1.5.0",
+    "AngularJS.Core": "1.5.0",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final"
