@@ -14,12 +14,12 @@ namespace Navi.WebApi.Controllers
             _db = db;
         }
 
-        [Route("api/location")]
+        [Route("api/locations/{id}")]
         [HttpGet]
         public Location GetLocation()
         {
             LocationRepository location = new LocationRepository(_db);
-
+            int id = 1;
             var l = location.GetLocation(1);
 
             return l;
