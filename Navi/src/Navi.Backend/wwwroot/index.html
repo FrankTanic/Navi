@@ -1,15 +1,18 @@
 ﻿<!doctype html>
-<html ng-app>
+<html ng-app="navigatorApp">
 <head>
-    <script src="/node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="Scripts-ng/app.js"></script>
+    <script src="Scripts-ng/controllers.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdgvozgmzuv44ifD8wDpi5guTofDK2DqM"></script>
+    <script type="text/javascript" src="Scripts/mapsLogic.js"></script>
+    <link rel="stylesheet" href="Styles/Style.css" />
 </head>
 <body>
-    <div>
-        <label>Name:</label>
-        <input type="text" ng-model="yourName" placeholder="Enter a name here">
-        <hr>
-        <h1>Hello {{yourName}}!</h1>
-        <p>1 + 2 = {{ 1 + 2 }}</p>
-    </div>
+
+    <div ng-include="'/Partials/navbar.html'"></div>
+
+    <div ng-view></div>
 </body>
 </html>

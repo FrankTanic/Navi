@@ -1,0 +1,44 @@
+﻿body {
+    margin: auto;
+}
+
+/* Mapcanvas*/
+#mapCanvas {
+    width: 500px;
+    height: 400px;
+    float: left;
+}
+
+/* Infopanel Maps*/
+#infoPanel {
+    float: left;
+    margin-left: 10px;
+}
+    #infoPanel div {
+        margin-bottom: 5px;
+    }
+
+/* Navbar Styling*/
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar li {
+    float: left;
+}
+    .navbar li a {
+        font-family: Tahoma;
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+        .navbar li a:hover {
+            font-family: Tahoma;
+            background-color: #111;
+        }

@@ -34,6 +34,15 @@ namespace Navi.WebApi
 
             // Add framework services.
             services.AddMvc();
+
+            // Add CORS policies
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Navi", builder =>
+                {
+                    builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +52,7 @@ namespace Navi.WebApi
             loggerFactory.AddDebug();
 
             app.UseIISPlatformHandler();
-
+            app.UseCors("Navi");
             app.UseStaticFiles();
 
             app.UseMvc();

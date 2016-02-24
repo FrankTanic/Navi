@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Mvc;
 using Navi.WebApi.Models;
 using Navi.WebApi.Repositories;
+using System.Collections.Generic;
 
 namespace Navi.WebApi.Controllers
 {
@@ -13,15 +14,23 @@ namespace Navi.WebApi.Controllers
             _db = db;
         }
 
-        [Route("api/location")]
+        [Route("api/locations/{id}")]
         [HttpGet]
         public Location GetLocation()
         {
             LocationRepository location = new LocationRepository(_db);
-
+            int id = 1;
             var l = location.GetLocation(1);
 
             return l;
+        }
+        [Route("api/locations")]
+        [HttpGet]
+        public IList<Location> GetAllLocation()
+        {
+            LocationRepository location = new LocationRepository(_db);
+
+            return location.GetAllLocations();
         }
     }
 }
