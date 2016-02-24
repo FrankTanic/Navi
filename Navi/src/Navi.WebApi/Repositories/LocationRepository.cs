@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Navi.WebApi.Models;
+using System.Collections.Generic;
 
 namespace Navi.WebApi.Repositories
 {
@@ -17,6 +18,12 @@ namespace Navi.WebApi.Repositories
             var location = _db.Locations.Single(x => x.Id == id);
 
             return location ?? null;
+        }
+
+        public IList<Location> GetAllLocations()
+        {
+
+            return _db.Locations.ToList();
         }
     }
 }
