@@ -15,3 +15,7 @@ navigatorControllers.controller('LocationListCtrl', function ($scope, dataServic
         $scope.locations = dataResponse;
     });
 });
+
+navigatorControllers.controller('CreateCtrl', function ($scope, dataService) {
+    window.initialize();
+});

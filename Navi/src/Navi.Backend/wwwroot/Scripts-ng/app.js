@@ -13,6 +13,7 @@ navigatorApp.config(['$routeProvider',
         }).
         when('/Create', {
             templateUrl: 'CreateLocation/Create.html',
+            controller: 'CreateCtrl'
         }).
         otherwise({
             redirectTo: '/locations'
