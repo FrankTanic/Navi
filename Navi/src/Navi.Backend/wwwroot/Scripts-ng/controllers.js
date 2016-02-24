@@ -1,17 +1,17 @@
-﻿var navigatorApp = angular.module('navigatorApp', []);
+﻿var navigatorControllers = angular.module('navigatorControllers', []);
 
-navigatorApp.service('dataService', function ($http) {
+navigatorControllers.service('dataService', function ($http) {
 this.getData = function() {
     return $http({
         method: 'GET',
-        url: 'http://localhost:59184/api/location',
+        url: 'http://localhost:59184/api/locations',
      });
  }
 });
 
-navigatorApp.controller('LocationListCtrl', function ($scope, dataService) {
-    $scope.data = null;
+navigatorControllers.controller('LocationListCtrl', function ($scope, dataService) {
+    $scope.locations = null;
     dataService.getData().then(function(dataResponse) {
-        $scope.data = dataResponse;
+        $scope.locations = dataResponse;
     });
 });
