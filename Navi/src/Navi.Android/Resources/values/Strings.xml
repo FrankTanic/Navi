@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">Navi.Android</string>
+    <string name="createRoute">Create Route</string>
+    <string name="ApplicationName">Navi</string>
 </resources>
