@@ -1,28 +1,4 @@
-﻿<!doctype html>
-<html ng-app>
-<head>
-    <script src="../node_modules/angular/angular.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdgvozgmzuv44ifD8wDpi5guTofDK2DqM"></script>
-    <script type="text/javascript" src="../Scripts/mapsLogic.js"></script>
-    <style>
-      #mapCanvas {
-          width: 500px;
-          height: 400px;
-          float: left;
-      }
-
-      #infoPanel {
-          float: left;
-          margin-left: 10px;
-      }
-
-          #infoPanel div {
-              margin-bottom: 5px;
-          }
-    </style>
-</head>
-<body>
-    <div>
+﻿    <div>
         <div id="mapCanvas"></div>
         <div id="infoPanel">
             <b>Marker status:</b>
@@ -34,5 +10,3 @@
             <button href"#" onclick="saveLocation()">Is this the location you want to go to?</button>
         </div>
     </div>
-</body>
-</html>

@@ -11,6 +11,9 @@ navigatorApp.config(['$routeProvider',
             templateUrl: 'Partials/location-list.html',
             controller: 'LocationListCtrl'
         }).
+        when('/Create', {
+            templateUrl: 'CreateLocation/Create.html',
+        }).
         otherwise({
             redirectTo: '/locations'
         });
