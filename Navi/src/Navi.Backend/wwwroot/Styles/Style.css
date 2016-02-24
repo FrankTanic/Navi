@@ -30,7 +30,6 @@
 .navbar li {
     float: left;
 }
-
     .navbar li a {
         font-family: Tahoma;
         display: inline-block;
@@ -39,7 +38,6 @@
         padding: 14px 16px;
         text-decoration: none;
     }
-
         .navbar li a:hover {
             font-family: Tahoma;
             background-color: #111;
