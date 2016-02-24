@@ -67,5 +67,3 @@ function saveLocation() {
     latLng = document.getElementById('info').innerHTML;
     localStorage.setItem("lastLocation", JSON.stringify(latLng));
 }
-// Onload handler to fire off the app.
-google.maps.event.addDomListener(window, 'load', initialize);
