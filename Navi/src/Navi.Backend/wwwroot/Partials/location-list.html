@@ -1,0 +1,9 @@
+﻿<div ng-controller="LocationListCtrl">
+    <h1>Locations</h1>
+
+    <ul>
+        <li ng-repeat="location in locations.data">
+            <a href="#/location/{{location.Id}}">{{location.Id}} - {{location.LocationName}}</a>
+        </li>
+    </ul>
+</div>
