@@ -9,9 +9,17 @@ this.getData = function() {
  }
 });
 
-navigatorControllers.controller('LocationListCtrl', function ($scope, dataService) {
+navigatorControllers.controller('locationListCtrl', function ($scope, dataService) {
     $scope.locations = null;
     dataService.getData().then(function(dataResponse) {
         $scope.locations = dataResponse;
     });
+});
+
+navigatorControllers.controller('createCtrl', function ($scope, dataService) {
+    window.initialize();
+});
+
+navigatorControllers.controller('radiusCtrl', function ($scope, dataService) {
+    window.initialize();
 });
