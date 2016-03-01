@@ -9,11 +9,15 @@ navigatorApp.config(['$routeProvider',
       $routeProvider.
         when('/locations', {
             templateUrl: 'Partials/location-list.html',
-            controller: 'LocationListCtrl'
+            controller: 'locationListCtrl'
         }).
-        when('/Create', {
-            templateUrl: 'CreateLocation/Create.html',
-            controller: 'CreateCtrl'
+        when('/create', {
+            templateUrl: 'CreateLocation/create.html',
+            controller: 'createCtrl'
+        }).
+        when('/radius', {
+            templateUrl: 'CreateLocation/radius.html',
+            controller: 'radiusCtrl'
         }).
         otherwise({
             redirectTo: '/locations'

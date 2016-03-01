@@ -25,12 +25,12 @@ function initialize() {
         fillColor: '#AA0000'
     });
     circle.bindTo('center', markerloc, 'position');
-
+    circle.setEditable(true);
     // Update current position info.
     updateMarkerPosition(latLng);
     geocodePosition(latLng);
 
-    // Add dragging event listeners.
+    // Add event listeners.
     google.maps.event.addListener(marker, 'dragstart', function () {
         updateMarkerAddress('Dragging...');
     });
@@ -44,6 +44,10 @@ function initialize() {
         updateMarkerStatus('Drag ended');
         geocodePosition(marker.getPosition());
         radiusCheck(latLng, marker.getPosition())
+    });
+
+    google.maps.event.addListener(circle, 'radius_changed', function () {
+        localStorage.setItem("circleRadius", circle.getRadius());
     });
 }
 
