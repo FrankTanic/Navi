@@ -1,51 +1,51 @@
 ﻿var geocoder = new google.maps.Geocoder();
 var latLngMob = new google.maps.LatLng(51.8719992870816, 4.5463230257950045);
 var latLng = new google.maps.LatLng(51.871784, 4.546146);
+
 function initialize() {
+    var lastLocation = localStorage.getItem("lastLocation");
     var map = new google.maps.Map(document.getElementById('mapCanvas'), {
         zoom: 18,
         center: latLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    var marker = new google.maps.Marker({
-        position: latLngMob,
-        title: 'Point A',
-        map: map,
-        draggable: true
-    });
-    var markerloc = new google.maps.Marker({
+    var locationMarker = new google.maps.Marker({
         position: latLng,
-        title: 'Point B',
+        title: 'The BLiS HQ',
         map: map,
         draggable: false
     });
-    var circle = new google.maps.Circle({
-        map: map,
-        radius: 50,    
-        fillColor: '#AA0000'
-    });
-    circle.bindTo('center', markerloc, 'position');
-    circle.setEditable(true);
-    // Update current position info.
-    updateMarkerPosition(latLng);
-    geocodePosition(latLng);
 
+    if (typeof lastLocation === 'undefined' || lastLocation === null) {
+        // Update current position info.
+        updateMarkerPosition(latLng);
+        geocodePosition(latLng);
+    } else {
+        updateMarkerPosition(latLng);
+        var circle = new google.maps.Circle({
+            map: map,
+            radius: 50,
+            fillColor: '#AA0000',
+            center: locationMarker.getPosition(),
+            setEditable: true
+        });
+        document.getElementById('info').style.display = "none";
+    }
     // Add event listeners.
-    google.maps.event.addListener(marker, 'dragstart', function () {
+    google.maps.event.addListener(locationMarker, 'dragstart', function () {
         updateMarkerAddress('Dragging...');
     });
 
-    google.maps.event.addListener(marker, 'drag', function () {
+    google.maps.event.addListener(locationMarker, 'drag', function () {
         updateMarkerStatus('Dragging...');
-        updateMarkerPosition(marker.getPosition());
+        updateMarkerPosition(locationMarker.getPosition());
     });
 
-    google.maps.event.addListener(marker, 'dragend', function () {
+    google.maps.event.addListener(locationMarker, 'dragend', function () {
         updateMarkerStatus('Drag ended');
-        geocodePosition(marker.getPosition());
-        radiusCheck(latLng, marker.getPosition())
+        geocodePosition(locationMarker.getPosition());
+        radiusCheck(latLng, locationMarker.getPosition())
     });
-
     google.maps.event.addListener(circle, 'radius_changed', function () {
         localStorage.setItem("circleRadius", circle.getRadius());
     });
