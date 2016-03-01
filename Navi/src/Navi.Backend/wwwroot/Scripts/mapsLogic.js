@@ -3,7 +3,6 @@ var latLngMob = new google.maps.LatLng(51.8719992870816, 4.5463230257950045);
 var latLng = new google.maps.LatLng(51.871784, 4.546146);
 
 function initialize() {
-    var lastLocation = localStorage.getItem("lastLocation");
     var map = new google.maps.Map(document.getElementById('mapCanvas'), {
         zoom: 18,
         center: latLng,
@@ -15,12 +14,11 @@ function initialize() {
         map: map,
         draggable: false
     });
+    var lastLocation = localStorage.getItem("lastLocation");
+    updateMarkerPosition(latLng);
+    geocodePosition(latLng);
 
-    if (typeof lastLocation === 'undefined' || lastLocation === null) {
-        // Update current position info.
-        updateMarkerPosition(latLng);
-        geocodePosition(latLng);
-    } else {
+    if (!typeof lastLocation === 'undefined' || !lastLocation === null)  {
         updateMarkerPosition(latLng);
         var circle = new google.maps.Circle({
             map: map,
@@ -30,7 +28,11 @@ function initialize() {
             setEditable: true
         });
         document.getElementById('info').style.display = "none";
+        google.maps.event.addListener(circle, 'radius_changed', function () {
+            localStorage.setItem("circleRadius", circle.getRadius());
+        });
     }
+
     // Add event listeners.
     google.maps.event.addListener(locationMarker, 'dragstart', function () {
         updateMarkerAddress('Dragging...');
@@ -45,9 +47,6 @@ function initialize() {
         updateMarkerStatus('Drag ended');
         geocodePosition(locationMarker.getPosition());
         radiusCheck(latLng, locationMarker.getPosition())
-    });
-    google.maps.event.addListener(circle, 'radius_changed', function () {
-        localStorage.setItem("circleRadius", circle.getRadius());
     });
 }
 
