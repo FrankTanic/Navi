@@ -5,7 +5,7 @@ using Navi.WebApi.Models;
 
 namespace Navi.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/locations")]
     public class LocationsController : Controller
     {
         private readonly NaviDbContext _db;
@@ -50,7 +50,7 @@ namespace Navi.WebApi.Controllers
             _db.Add(location);
             _db.SaveChanges();
 
-            return new HttpOkObjectResult(location);
+            return new CreatedAtActionResult("Post", "Locations", new { id = location.Id }, location);
         }
 
         // PUT location
