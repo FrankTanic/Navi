@@ -19,7 +19,6 @@ function initialize() {
         map: map,
         draggable: false
     });
-    // Add circle overlay and bind to marker
     var circle = new google.maps.Circle({
         map: map,
         radius: 50,    
