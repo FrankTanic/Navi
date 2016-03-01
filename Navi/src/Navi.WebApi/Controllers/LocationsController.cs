@@ -17,9 +17,11 @@ namespace Navi.WebApi.Controllers
 
         // Get all locations
         [HttpGet]
-        public IEnumerable<Location> Get()
+        public IActionResult Get()
         {
-            return _db.Locations.ToList();
+            IEnumerable<Location> locations = _db.Locations.ToList();
+
+            return new HttpOkObjectResult(locations);
         }
 
         // GET location
