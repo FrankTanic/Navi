@@ -9,6 +9,15 @@ namespace Navi.WebApi.Models
             : base(options)
         { }
 
-        public DbSet<Location> Locations { get; set; } 
+        public DbSet<Locations> Location { get; set; }
+        public DbSet<Coordinates> Coordinate { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Locations>()
+                .HasOne(c => c.Coordinate)
+                .WithOne(l => l.Location)
+                .HasForeignKey<Coordinates>(c => c.LocationForeignKey);
+        }
     }
 }

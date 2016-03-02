@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using Navi.WebApi.Models;
@@ -19,7 +20,7 @@ namespace Navi.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Location> locations = _db.Locations.ToList();
+            IEnumerable<Locations> locations = _db.Location.ToList();
 
             return new HttpOkObjectResult(locations);
         }
@@ -28,7 +29,7 @@ namespace Navi.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Location location = _db.Locations.SingleOrDefault(l => l.Id == id);
+            Locations location = _db.Location.SingleOrDefault(l => l.Id == id);
 
             if (location == null)
             {
@@ -40,12 +41,14 @@ namespace Navi.WebApi.Controllers
 
         // POST location
         [HttpPost]
-        public IActionResult Post([FromBody]Location location)
+        public IActionResult Post([FromBody]Locations location)
         {
             if (location == null)
             {
                 return new BadRequestResult();
             }
+
+            location.Created = DateTime.UtcNow;
 
             _db.Add(location);
             _db.SaveChanges();
@@ -55,7 +58,7 @@ namespace Navi.WebApi.Controllers
 
         // PUT location
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Location location)
+        public IActionResult Put(int id, [FromBody]Locations location)
         {
             if (location == null)
             {
@@ -72,7 +75,7 @@ namespace Navi.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Location location = _db.Locations.SingleOrDefault(l => l.Id == id);
+            Locations location = _db.Location.SingleOrDefault(l => l.Id == id);
 
             if (location == null)
             {
