@@ -1,6 +1,6 @@
 ﻿var geocoder = new google.maps.Geocoder();
-var latLngMob = new google.maps.LatLng(51.8719992870816, 4.5463230257950045);
 var latLng = new google.maps.LatLng(51.871784, 4.546146);
+var lastLocation = localStorage.getItem("lastLocation");
 
 function initialize() {
     var map = new google.maps.Map(document.getElementById('mapCanvas'), {
@@ -8,30 +8,17 @@ function initialize() {
         center: latLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
+
     var locationMarker = new google.maps.Marker({
         position: latLng,
         title: 'The BLiS HQ',
         map: map,
-        draggable: false
+        draggable: true
     });
-    var lastLocation = localStorage.getItem("lastLocation");
+
+    // Update current position info.
     updateMarkerPosition(latLng);
     geocodePosition(latLng);
-
-    if (!typeof lastLocation === 'undefined' || !lastLocation === null)  {
-        updateMarkerPosition(latLng);
-        var circle = new google.maps.Circle({
-            map: map,
-            radius: 50,
-            fillColor: '#AA0000',
-            center: locationMarker.getPosition(),
-            setEditable: true
-        });
-        document.getElementById('info').style.display = "none";
-        google.maps.event.addListener(circle, 'radius_changed', function () {
-            localStorage.setItem("circleRadius", circle.getRadius());
-        });
-    }
 
     // Add event listeners.
     google.maps.event.addListener(locationMarker, 'dragstart', function () {
@@ -46,8 +33,23 @@ function initialize() {
     google.maps.event.addListener(locationMarker, 'dragend', function () {
         updateMarkerStatus('Drag ended');
         geocodePosition(locationMarker.getPosition());
-        radiusCheck(latLng, locationMarker.getPosition())
     });
+
+    google.maps.event.addListener(circle, 'radius_changed', function () {
+        localStorage.setItem("circleRadius", circle.getRadius());
+    });
+
+    if (typeof(lastLocation) !== 'undefined' && lastLocation) {
+        var circle = new google.maps.Circle({
+            map: map,
+            radius: 50,
+            fillColor: '#AA0000',
+            center: locationMarker.getPosition(),
+            setEditable: true
+        });
+        circle.bindTo('center', locationMarker, 'position');
+        document.getElementById('info').style.display = "none";
+    }
 }
 
 function geocodePosition(pos) {
