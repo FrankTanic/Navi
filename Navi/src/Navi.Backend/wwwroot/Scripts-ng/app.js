@@ -3,7 +3,6 @@
   'navigatorControllers'
 ]);
 
-
 navigatorApp.config(['$routeProvider',
   function ($routeProvider) {
       $routeProvider.
