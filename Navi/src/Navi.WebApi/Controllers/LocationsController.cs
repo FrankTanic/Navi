@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using Navi.WebApi.Models;
+using Microsoft.Data.Entity;
 
 namespace Navi.WebApi.Controllers
 {
@@ -20,7 +21,7 @@ namespace Navi.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Locations> locations = _db.Location.ToList();
+            IEnumerable<Locations> locations = _db.Location.Include(c => c.Coordinate).ToList();
 
             return new HttpOkObjectResult(locations);
         }
@@ -29,7 +30,7 @@ namespace Navi.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Locations location = _db.Location.SingleOrDefault(l => l.Id == id);
+            Locations location = _db.Location.Include(c => c.Coordinate).SingleOrDefault(l => l.Id == id);
 
             if (location == null)
             {

@@ -8,30 +8,14 @@ using Navi.WebApi.Models;
 namespace Navi.WebApi.Migrations
 {
     [DbContext(typeof(NaviDbContext))]
-    [Migration("20160302144818_initial")]
-    partial class initial
+    [Migration("20160303135243_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Navi.WebApi.Models.Coordinates", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Altitude");
-
-                    b.Property<double>("Latitude");
-
-                    b.Property<int>("LocationForeignKey");
-
-                    b.Property<double>("Longitude");
-
-                    b.HasKey("Id");
-                });
 
             modelBuilder.Entity("Navi.WebApi.Models.Locations", b =>
                 {
@@ -43,13 +27,6 @@ namespace Navi.WebApi.Migrations
                     b.Property<string>("LocationName");
 
                     b.HasKey("Id");
-                });
-
-            modelBuilder.Entity("Navi.WebApi.Models.Coordinates", b =>
-                {
-                    b.HasOne("Navi.WebApi.Models.Locations")
-                        .WithOne()
-                        .HasForeignKey("Navi.WebApi.Models.Coordinates", "LocationForeignKey");
                 });
         }
     }

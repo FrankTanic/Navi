@@ -8,9 +8,10 @@ using Navi.WebApi.Models;
 namespace Navi.WebApi.Migrations
 {
     [DbContext(typeof(NaviDbContext))]
-    partial class NaviDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160303135431_coordinates")]
+    partial class coordinates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -25,8 +26,6 @@ namespace Navi.WebApi.Migrations
 
                     b.Property<double>("Latitude");
 
-                    b.Property<int>("LocationId");
-
                     b.Property<double>("Longitude");
 
                     b.HasKey("Id");
@@ -37,6 +36,8 @@ namespace Navi.WebApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("CoordinateId");
+
                     b.Property<DateTime>("Created");
 
                     b.Property<string>("LocationName");
@@ -44,11 +45,11 @@ namespace Navi.WebApi.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Navi.WebApi.Models.Coordinates", b =>
+            modelBuilder.Entity("Navi.WebApi.Models.Locations", b =>
                 {
-                    b.HasOne("Navi.WebApi.Models.Locations")
-                        .WithOne()
-                        .HasForeignKey("Navi.WebApi.Models.Coordinates", "LocationId");
+                    b.HasOne("Navi.WebApi.Models.Coordinates")
+                        .WithMany()
+                        .HasForeignKey("CoordinateId");
                 });
         }
     }

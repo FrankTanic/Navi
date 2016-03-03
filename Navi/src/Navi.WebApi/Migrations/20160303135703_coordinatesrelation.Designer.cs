@@ -8,9 +8,10 @@ using Navi.WebApi.Models;
 namespace Navi.WebApi.Migrations
 {
     [DbContext(typeof(NaviDbContext))]
-    partial class NaviDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160303135703_coordinatesrelation")]
+    partial class coordinatesrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
